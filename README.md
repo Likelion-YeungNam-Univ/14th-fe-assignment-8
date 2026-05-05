@@ -16,6 +16,14 @@
     git switch feature/{이름}
 ```
 
+## Install package.json
+
+- Node.js 프로젝트에 package.json 파일 기반 의존성 패키지를 설치합니다.
+
+```bash
+    npm install # 혹은 npm i
+```
+
 ## Pull Request
 
 - PR은 가능한 상세하게 작성해주세요.
