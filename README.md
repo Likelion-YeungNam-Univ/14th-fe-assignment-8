@@ -1,8 +1,8 @@
-## 14th-fe-assignment-8
+# 14th-fe-assignment-8
 
 영남대 멋쟁이사자처럼 14기 프론트엔드 트랙 8차시 과제
 
-### Branch Naming Convention
+## Branch Naming Convention
 
 꼭 `main` 브랜치에서 생성해주세요!
 
@@ -21,6 +21,6 @@
 - PR은 가능한 상세하게 작성해주세요.
 - AI의 도움을 받았다면 내용을 이해한 뒤 자신만의 언어로 재구성하여 설명해주세요!
 
-# Code Review
+## Code Review
 
 - 궁금한 점이나 개선점 등 상대를 위해 자세하게 써주세요~
