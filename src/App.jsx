@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import MovieList from './components/MovieList';
 import MovieSideBar from './components/MovieSideBar';
@@ -11,8 +11,7 @@ const App = () => {
 
   const [loading, setLoading] = useState(true);
 
-  const hasFetched = useRef(false);
-
+  // 영화 추가 함수
   const handleAddMovie = (movie, type) => {
     const setTarget =
       type === 'watched' ? setWatchedMovies : setWillWatchMovies;
@@ -25,6 +24,7 @@ const App = () => {
     });
   };
 
+  // 영화 삭제 함수
   const handleRemoveMovie = (movie, type) => {
     const setTarget =
       type === 'watched' ? setWatchedMovies : setWillWatchMovies;
@@ -35,11 +35,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    if (hasFetched.current) return;
-
-    hasFetched.current = true;
-
-    const fetchMovies = () => {
+    const timer = setTimeout(() => {
       const generatedMovies = [];
 
       for (let i = 1; i <= 2500; i++) {
@@ -52,13 +48,11 @@ const App = () => {
 
       alert('데이터를 가져오는 중입니다...');
 
-      setTimeout(() => {
-        setMovies(generatedMovies);
-        setLoading(false);
-      }, 1000);
-    };
+      setMovies(generatedMovies);
+      setLoading(false);
+    }, 100);
 
-    fetchMovies();
+    return () => clearTimeout(timer);
   }, []);
 
   if (loading) {
