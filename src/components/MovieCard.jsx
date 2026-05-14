@@ -5,7 +5,8 @@ const MovieCard = ({
 }) => {
   return (
     <div className="border w-full mx-auto bg-white p-5 text-center">
-      <h2 className="text-2xl font-bold">
+      <h2 className="text-2xl font-bold
+">
         {movie.title}
       </h2>
 

@@ -14,7 +14,7 @@ const FavoriteMovieList = ({
             key={movie.id}
             className="border p-3 flex justify-between items-center"
           >
-            <p>{movie.title}</p>
+            <p className="font-black">{movie.title}</p>
 
             <button
               onClick={() =>
