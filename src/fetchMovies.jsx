@@ -4,7 +4,7 @@ const fetchMovies = () => {
   const movies = [];
 
   // movies 배열 안에 객체 형태의 데이터 추가
-  for (let i = 1; i <= 10; i++) {
+  for (let i = 1; i <= 2500; i++) {
     movies.push({
       id: `${i}`,
       title: `Movie ${i}`,
