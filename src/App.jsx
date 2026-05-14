@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
-import Header from "./components/Header";
-import MovieList from "./components/MovieList";
+import Header from "./components/Header.jsx";
+import MovieList from "./components/MovieList.jsx";
 import WatchedMovieList from "./components/WatchedMoviedList.jsx";
-import FavoriteMovieList from "./components/FavoriteMovieList";
+import FavoriteMovieList from "./components/FavoriteMovieList.jsx";
 
 import fetchMovies from "./fetchMovies";
 
@@ -19,35 +19,93 @@ function App() {
   const [loading, setLoading] =
     useState(true);
 
+  // 영화 불러오기
   useEffect(() => {
-    const loadMovies = async () => {
-      const data = await fetchMovies();
+    const loadData = async () => {
+      setLoading(true);
+
+      const data = await new Promise(
+        (resolve) => {
+          setTimeout(() => {
+            resolve(fetchMovies());
+          }, 2000);
+        }
+      );
 
       setMovies(data);
 
       setLoading(false);
     };
 
-    loadMovies();
+    loadData();
   }, []);
 
+  // 시청한 영화 담기
   const addWatchedMovie = (movie) => {
     setWatchedMovies([
       ...watchedMovies,
       movie,
     ]);
+
+    setMovies(
+      movies.filter(
+        (item) => item.id !== movie.id
+      )
+    );
   };
 
+  // 볼 영화 담기
   const addFavoriteMovie = (movie) => {
     setFavoriteMovies([
       ...favoriteMovies,
       movie,
     ]);
+
+    setMovies(
+      movies.filter(
+        (item) => item.id !== movie.id
+      )
+    );
   };
 
+  // 시청 목록 삭제
+  const removeWatchedMovie = (movie) => {
+    setWatchedMovies(
+      watchedMovies.filter(
+        (item) => item.id !== movie.id
+      )
+    );
+
+    const updatedMovies = [...movies, movie];
+
+    updatedMovies.sort(
+      (a, b) => Number(a.id) - Number(b.id)
+    );
+
+    setMovies(updatedMovies);
+  };
+
+  // 볼 목록 삭제
+  const removeFavoriteMovie = (movie) => {
+    setFavoriteMovies(
+      favoriteMovies.filter(
+        (item) => item.id !== movie.id
+      )
+    );
+
+    const updatedMovies = [...movies, movie];
+
+    updatedMovies.sort(
+      (a, b) => Number(a.id) - Number(b.id)
+    );
+
+    setMovies(updatedMovies);
+  };
+
+  // 로딩 화면
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen text-3xl font-bold">
+      <div className="flex justify-center items-center h-screen text-5xl font-bold">
         Loading...
       </div>
     );
@@ -60,6 +118,9 @@ function App() {
       <main className="flex gap-5 p-5 h-[85vh]">
         <WatchedMovieList
           watchedMovies={watchedMovies}
+          onRemoveWatched={
+            removeWatchedMovie
+          }
         />
 
         <MovieList
@@ -70,6 +131,9 @@ function App() {
 
         <FavoriteMovieList
           favoriteMovies={favoriteMovies}
+          onRemoveFavorite={
+            removeFavoriteMovie
+          }
         />
       </main>
     </div>

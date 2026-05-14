@@ -1,52 +1,22 @@
-// MovieList.jsx
-import React, { useState, useEffect } from "react";
-import fetchMovies from "./fetchMovies";
+import MovieCard from "./MovieCard";
 
-const MovieList = () => {
-  const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const loadData = async () => {
-      setLoading(true);
-
-      // 오래 걸리는 작업이라고 가정
-      const data = await new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(fetchMovies());
-        }, 2000); // 2초 후 데이터 가져오기
-      });
-
-      setMovies(data);
-      setLoading(false);
-    };
-
-    loadData();
-  }, []);
-
-  // 로딩 중 화면
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-screen text-4xl font-bold">
-        Loading...
-      </div>
-    );
-  }
-
-  // 로딩 끝난 후 화면
+const MovieList = ({
+  movies,
+  onAddWatched,
+  onAddFavorite,
+}) => {
   return (
-    <div>
-      <h1 className="text-3xl font-bold text-red-600">
-        Movie List
-      </h1>
-
-      <ul>
+    <div className="flex-1 h-[70vh] overflow-y-scroll">
+      <div className="flex flex-col gap-3">
         {movies.map((movie) => (
-          <li key={movie.id}>
-            {movie.title}
-          </li>
+          <MovieCard
+            key={movie.id}
+            movie={movie}
+            onAddWatched={onAddWatched}
+            onAddFavorite={onAddFavorite}
+          />
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
