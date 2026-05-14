@@ -1,9 +1,13 @@
-import React from 'react'
-
-const FavoriteMovieList = () => {
+const FavoriteMovieList = ({ favoriteMovies }) => {
   return (
-    <div>FavoriteMovieList</div>
-  )
-}
+    <div className="side-list">
+      <h2>볼 영화 목록</h2>
 
-export default FavoriteMovieList
+      {favoriteMovies.map((movie) => (
+        <p key={movie.id}>{movie.title}</p>
+      ))}
+    </div>
+  );
+};
+
+export default FavoriteMovieList;
