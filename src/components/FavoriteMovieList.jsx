@@ -3,11 +3,10 @@ const FavoriteMovieList = ({
   onRemoveFavorite,
 }) => {
   return (
-    <div className="w-1/4 bg-white p-5">
+    <div className="bg-white p-5">
       <h2 className="flex justify-center text-3xl font-bold mb-5">
         볼 영화 목록
       </h2>
-<div className="h-[70vh] overflow-y-scroll">
       <div className="flex flex-col gap-3 ">
         {favoriteMovies.map((movie) => (
           <div
@@ -27,7 +26,6 @@ const FavoriteMovieList = ({
           </div>
         ))}
       </div>
-    </div>
       
     </div>
   );

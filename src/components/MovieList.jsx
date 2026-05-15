@@ -6,7 +6,6 @@ const MovieList = ({
   onAddFavorite,
 }) => {
   return (
-    <div className="flex-1 overflow-y-scroll [scrollbar-gutter:stable]">
       <div className="flex flex-col gap-3">
         {movies.map((movie) => (
           <MovieCard
@@ -17,7 +16,6 @@ const MovieList = ({
           />
         ))}
       </div>
-    </div>
   );
 };
 

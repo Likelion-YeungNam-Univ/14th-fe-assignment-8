@@ -4,6 +4,7 @@ import Header from "./components/Header.jsx";
 import MovieList from "./components/MovieList.jsx";
 import WatchedMovieList from "./components/WatchedMoviedList.jsx";
 import FavoriteMovieList from "./components/FavoriteMovieList.jsx";
+import Scroll from "./components/Scroll.jsx";
 
 import fetchMovies from "./fetchMovies";
 
@@ -116,25 +117,33 @@ function App() {
       <Header />
 
       <main className="flex gap-5 p-5 h-[85vh]">
-        <WatchedMovieList
+        <Scroll isMovieList={false} >
+          <WatchedMovieList
           watchedMovies={watchedMovies}
           onRemoveWatched={
             removeWatchedMovie
           }
         />
+        </Scroll>
+      
 
-        <MovieList
-          movies={movies}
-          onAddWatched={addWatchedMovie}
-          onAddFavorite={addFavoriteMovie}
-        />
+        <Scroll isMovieList={true}>
+          <MovieList
+            movies={movies}
+            onAddWatched={addWatchedMovie}
+            onAddFavorite={addFavoriteMovie}
+          />
+        </Scroll>
 
-        <FavoriteMovieList
+        <Scroll isMovieList={false}>
+          <FavoriteMovieList
           favoriteMovies={favoriteMovies}
           onRemoveFavorite={
             removeFavoriteMovie
           }
         />
+        </Scroll>
+        
       </main>
     </div>
   );
