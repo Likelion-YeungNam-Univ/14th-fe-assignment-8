@@ -6,37 +6,47 @@ const MovieList = () => {
   const [toWatch, setToWatch] = useState([]);       
   const [isLoading, setIsLoading] = useState(true); 
 
-  const fetchMovies = () => {
-    const movies = [];
-    for (let i = 1; i <= 2500; i++) {
-      movies.push({
-        id: `${i}`,
-        title: `Movie ${i}`,
-        description: `Description for Movie ${i}`,
-      });
-    }
-    alert("데이터를 가져오는 중입니다...");
-    return movies;
-  };
+    const fetchMovies = () => {
+        const movies = [];
+        for (let i = 1; i <= 2500; i++) {
+        movies.push({
+            id: `${i}`,
+            title: `Movie ${i}`,
+            description: `Description for Movie ${i}`,
+        });
+        }
+        alert("데이터를 가져오는 중입니다...");
+        return movies;
+    };
 
-  useEffect(() => {
+    useEffect(() => {
     const timer = setTimeout(() => {
-      const data = fetchMovies();
-      setMovies(data);
-      setIsLoading(false); 
-    }, 100);
-    return () => clearTimeout(timer);
-  }, []);
+        const data = fetchMovies();
+        setMovies(data);
+        setIsLoading(false); 
+        }, 100);
+        return () => clearTimeout(timer);
+    }, []);
 
-  const handleAddWatched = (movie) => {
-    setWatched([...watched, movie]);
-    setMovies(movies.filter((m) => m.id !== movie.id)); 
-  };
+    const handleAddWatched = (movie) => {
+        setWatched([...watched, movie]);
+        setMovies(movies.filter((m) => m.id !== movie.id)); 
+    };
 
-  const handleAddToWatch = (movie) => {
-    setToWatch([...toWatch, movie]);
-    setMovies(movies.filter((m) => m.id !== movie.id)); 
-  };
+    const handleAddToWatch = (movie) => {
+        setToWatch([...toWatch, movie]);
+        setMovies(movies.filter((m) => m.id !== movie.id)); 
+    };
+
+    const handleDeleteWatched = (movie) => {
+        setMovies([...movies, movie]);
+        setWatched(watched.filter((m) => m.id !== movie.id));
+    };
+
+    const handleDeleteToWatch = (movie) => {
+        setMovies([...movies, movie]);
+        setToWatch(toWatch.filter((m) => m.id !== movie.id));
+    };
 
   if (isLoading) {
     return (
@@ -57,6 +67,9 @@ const MovieList = () => {
           <h2 className="text-2xl font-bold text-center mb-4">시청한 영화 목록</h2>
           <ul className="space-y-2 justify-between">
             {watched.map(m => <li key={m.id} className="p-2 bg-white shadow rounded text-center">{m.title}</li>)}
+            <button>
+                onClick={() => 
+            </button>
           </ul>
         </div>
 
