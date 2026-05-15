@@ -30,123 +30,128 @@ function App() {
           setTimeout(() => {
             resolve(fetchMovies());
           }, 2000);
-        }
-      );
+          return () => {
 
-      setMovies(data);
+            clearTimeout(timer);
 
-      setLoading(false);
-    };
+          };
 
-    loadData();
+        }, []);
+
+  setMovies(data);
+
+  setLoading(false);
+};
+
+loadData();
   }, []);
 
-  // 시청한 영화 담기
-  const addWatchedMovie = (movie) => {
-    setWatchedMovies([
-      ...watchedMovies,
-      movie,
-    ]);
+// 시청한 영화 담기
+const addWatchedMovie = (movie) => {
+  setWatchedMovies([
+    ...watchedMovies,
+    movie,
+  ]);
 
-    setMovies(
-      movies.filter(
-        (item) => item.id !== movie.id
-      )
-    );
-  };
+  setMovies(
+    movies.filter(
+      (item) => item.id !== movie.id
+    )
+  );
+};
 
-  // 볼 영화 담기
-  const addFavoriteMovie = (movie) => {
-    setFavoriteMovies([
-      ...favoriteMovies,
-      movie,
-    ]);
+// 볼 영화 담기
+const addFavoriteMovie = (movie) => {
+  setFavoriteMovies([
+    ...favoriteMovies,
+    movie,
+  ]);
 
-    setMovies(
-      movies.filter(
-        (item) => item.id !== movie.id
-      )
-    );
-  };
+  setMovies(
+    movies.filter(
+      (item) => item.id !== movie.id
+    )
+  );
+};
 
-  // 시청 목록 삭제
-  const removeWatchedMovie = (movie) => {
-    setWatchedMovies(
-      watchedMovies.filter(
-        (item) => item.id !== movie.id
-      )
-    );
+// 시청 목록 삭제
+const removeWatchedMovie = (movie) => {
+  setWatchedMovies(
+    watchedMovies.filter(
+      (item) => item.id !== movie.id
+    )
+  );
 
-    const updatedMovies = [...movies, movie];
+  const updatedMovies = [...movies, movie];
 
-    updatedMovies.sort(
-      (a, b) => Number(a.id) - Number(b.id)
-    );
+  updatedMovies.sort(
+    (a, b) => Number(a.id) - Number(b.id)
+  );
 
-    setMovies(updatedMovies);
-  };
+  setMovies(updatedMovies);
+};
 
-  // 볼 목록 삭제
-  const removeFavoriteMovie = (movie) => {
-    setFavoriteMovies(
-      favoriteMovies.filter(
-        (item) => item.id !== movie.id
-      )
-    );
+// 볼 목록 삭제
+const removeFavoriteMovie = (movie) => {
+  setFavoriteMovies(
+    favoriteMovies.filter(
+      (item) => item.id !== movie.id
+    )
+  );
 
-    const updatedMovies = [...movies, movie];
+  const updatedMovies = [...movies, movie];
 
-    updatedMovies.sort(
-      (a, b) => Number(a.id) - Number(b.id)
-    );
+  updatedMovies.sort(
+    (a, b) => Number(a.id) - Number(b.id)
+  );
 
-    setMovies(updatedMovies);
-  };
+  setMovies(updatedMovies);
+};
 
-  // 로딩 화면
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-screen text-5xl font-bold">
-        Loading...
-      </div>
-    );
-  }
-
+// 로딩 화면
+if (loading) {
   return (
-    <div className="bg-gray-200 min-h-screen">
-      <Header />
+    <div className="flex justify-center items-center h-screen text-5xl font-bold">
+      Loading...
+    </div>
+  );
+}
 
-      <main className="flex gap-5 p-5 h-[85vh]">
-        <Scroll isMovieList={false} >
-          <WatchedMovieList
+return (
+  <div className="bg-gray-200 min-h-screen">
+    <Header />
+
+    <main className="flex gap-5 p-5 h-[85vh]">
+      <Scroll isMovieList={false} >
+        <WatchedMovieList
           watchedMovies={watchedMovies}
           onRemoveWatched={
             removeWatchedMovie
           }
         />
-        </Scroll>
-      
+      </Scroll>
 
-        <Scroll isMovieList={true}>
-          <MovieList
-            movies={movies}
-            onAddWatched={addWatchedMovie}
-            onAddFavorite={addFavoriteMovie}
-          />
-        </Scroll>
 
-        <Scroll isMovieList={false}>
-          <FavoriteMovieList
+      <Scroll isMovieList={true}>
+        <MovieList
+          movies={movies}
+          onAddWatched={addWatchedMovie}
+          onAddFavorite={addFavoriteMovie}
+        />
+      </Scroll>
+
+      <Scroll isMovieList={false}>
+        <FavoriteMovieList
           favoriteMovies={favoriteMovies}
           onRemoveFavorite={
             removeFavoriteMovie
           }
         />
-        </Scroll>
-        
-      </main>
-    </div>
-  );
+      </Scroll>
+
+    </main>
+  </div>
+);
 }
 
 export default App;
