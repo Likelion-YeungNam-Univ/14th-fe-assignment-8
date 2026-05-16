@@ -46,6 +46,21 @@ const App = () => {
     )
   }
 
+  const DeleteMovie = (selectMovie) => {
+    
+    setWatchedMovies((prev) => 
+      prev.filter((movie) => movie.id !== selectMovie.id)
+    )
+
+    setMovieToWatchs((prev) => 
+      prev.filter((movie) => movie.id !== selectMovie.id)
+    )
+
+    setMovies((prev) => (
+      [...prev, selectMovie].sort((a, b) => Number(a.id) - Number(b.id))
+    ))
+  }
+
   useEffect(() => {
     setIsloading(true);
 
@@ -84,7 +99,7 @@ const App = () => {
                   <div className="font-black flex items-center">
                     {movie.title}
                   </div>
-                  <button type='button' onClick={() => DeleteMovie(movie)} id="WatchedPut" className="bg-gray-300 border-1 p-1">삭제</button>
+                  <button type='button' onClick={() => DeleteMovie(movie)} id="WatchedDelete" className="bg-gray-300 border-1 p-1">삭제</button>
                 </div>
               ))}
             </div>
@@ -115,7 +130,7 @@ const App = () => {
                   <div className="font-black flex items-center">
                     {movie.title}
                   </div>
-                  <button type='button' onClick={() => DeleteMovie(movie)} id="WatchedPut" className="bg-gray-300 border-1 p-1">삭제</button>
+                  <button type='button' onClick={() => DeleteMovie(movie)} id="ToWatchDelete" className="bg-gray-300 border-1 p-1">삭제</button>
                 </div>
                 ))}
             </div>
