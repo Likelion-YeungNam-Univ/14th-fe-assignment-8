@@ -6,8 +6,14 @@ const App = () => {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsloading] = useState(true);
 
+  
+  const [watchedMovies, setWatchedMovies] = useState([]);
+  const [MovieToWatchs, setMovieToWatchs] = useState([]);
+
   const fetchMovies = () => {
     const movies = [];
+
+    alert("데이터를 가져오는 중입니다...");
 
     for (let i = 1; i <= 2500; i++) {
       movies.push({
@@ -18,10 +24,18 @@ const App = () => {
       console.log("2500개의 영화 목록 가져오는 중...");
     }
 
-    alert("데이터를 가져오는 중입니다...");
-
     return movies;
   };
+
+
+  const addWatchedMovie = (selectMovie) => {
+
+    setWatchedMovies((prev) => [...prev, selectMovie])
+
+    setMovies((prev) => 
+      prev.filter((movie) => movie.id !== selectMovie.id)
+    )
+  }
 
   useEffect(() => {
     setIsloading(true);
@@ -51,10 +65,19 @@ const App = () => {
       <div id="Container">
         <div className="px-5 py-10">
           <div className="flex justify-between">
-            <div id="WatchedMovies" className="w-[370px] min-h-screen bg-gray-300">
+            <div id="WatchedMovies" className="w-[370px] h-[700px] min-h-screen bg-gray-300 overflow-y-scroll">
               <div className="p-5 flex justify-center">
                 <div className="text-2xl font-bold">시청한 영화 목록</div>
               </div>
+
+              {watchedMovies.map((movie) => (
+                <div key={movie.id} className="w-[370px] bg-white border-2 p-2 mb-3 border-black text-center flex justify-between">
+                  <div className="font-black">
+                    {movie.title}
+                  </div>
+                  <button type='button' onClick={() => addWatchedMovie(movie)} id="WatchedPut" className="bg-gray-300 border-1 p-1">삭제</button>
+                </div>
+              ))}
             </div>
 
             <div id="MovieList" className="w-[450px] h-[700px] bg-gray-500 overflow-y-scroll p-4">
@@ -67,14 +90,14 @@ const App = () => {
                     {movie.description}
                   </div>
                   <div className="flex justify-around">
-                    <button className="bg-gray-300 border-1 p-1">시청한 영화 담기</button>
-                    <button className="bg-gray-300 border-1 p-1">볼 영화 담기</button>
+                    <button type='button' onClick={() => addWatchedMovie(movie)} id="WatchedPut" className="bg-gray-300 border-1 p-1">시청한 영화 담기</button>
+                    <button type='button' id="MovieToWatchPut" className="bg-gray-300 border-1 p-1">볼 영화 담기</button>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div id="MovieToWatch" className="w-[370px] min-h-screen bg-gray-300">
+            <div id="MovieToWatch" className="w-[370px] h-[700px] min-h-screen bg-gray-300 overflow-y-scroll">
               <div className="p-5 flex justify-center">
                 <div className="text-2xl font-bold">볼 영화 목록</div>
               </div>
