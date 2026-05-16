@@ -8,7 +8,7 @@ const App = () => {
 
   
   const [watchedMovies, setWatchedMovies] = useState([]);
-  const [MovieToWatchs, setMovieToWatchs] = useState([]);
+  const [movieToWatchs, setMovieToWatchs] = useState([]);
 
   const fetchMovies = () => {
     const movies = [];
@@ -31,6 +31,15 @@ const App = () => {
   const addWatchedMovie = (selectMovie) => {
 
     setWatchedMovies((prev) => [...prev, selectMovie])
+
+    setMovies((prev) => 
+      prev.filter((movie) => movie.id !== selectMovie.id)
+    )
+  }
+
+  const addMovieToWatch = (selectMovie) => {
+
+    setMovieToWatchs((prev) => [...prev, selectMovie])
 
     setMovies((prev) => 
       prev.filter((movie) => movie.id !== selectMovie.id)
@@ -71,11 +80,11 @@ const App = () => {
               </div>
 
               {watchedMovies.map((movie) => (
-                <div key={movie.id} className="w-[370px] bg-white border-2 p-2 mb-3 border-black text-center flex justify-between">
-                  <div className="font-black">
+                <div key={movie.id} className="w-[370px] border-2 p-3 mb-2 border-black text-center flex justify-between">
+                  <div className="font-black flex items-center">
                     {movie.title}
                   </div>
-                  <button type='button' onClick={() => addWatchedMovie(movie)} id="WatchedPut" className="bg-gray-300 border-1 p-1">삭제</button>
+                  <button type='button' onClick={() => DeleteMovie(movie)} id="WatchedPut" className="bg-gray-300 border-1 p-1">삭제</button>
                 </div>
               ))}
             </div>
@@ -91,7 +100,7 @@ const App = () => {
                   </div>
                   <div className="flex justify-around">
                     <button type='button' onClick={() => addWatchedMovie(movie)} id="WatchedPut" className="bg-gray-300 border-1 p-1">시청한 영화 담기</button>
-                    <button type='button' id="MovieToWatchPut" className="bg-gray-300 border-1 p-1">볼 영화 담기</button>
+                    <button type='button' onClick={() => addMovieToWatch(movie)} id="MovieToWatchPut" className="bg-gray-300 border-1 p-1">볼 영화 담기</button>
                   </div>
                 </div>
               ))}
@@ -101,6 +110,14 @@ const App = () => {
               <div className="p-5 flex justify-center">
                 <div className="text-2xl font-bold">볼 영화 목록</div>
               </div>
+              {movieToWatchs.map((movie) => (
+                <div key={movie.id} className="w-[370px] border-2 p-3 mb-2 border-black text-center flex justify-between">
+                  <div className="font-black flex items-center">
+                    {movie.title}
+                  </div>
+                  <button type='button' onClick={() => DeleteMovie(movie)} id="WatchedPut" className="bg-gray-300 border-1 p-1">삭제</button>
+                </div>
+                ))}
             </div>
           </div>
 
