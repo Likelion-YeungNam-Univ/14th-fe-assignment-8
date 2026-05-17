@@ -1,34 +1,16 @@
-# 14th-fe-assignment-8
+# React + Vite
 
-영남대 멋쟁이사자처럼 14기 프론트엔드 트랙 8차시 과제
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Branch Naming Convention
+Currently, two official plugins are available:
 
-꼭 `main` 브랜치에서 생성해주세요!
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-```bash
-    git branch feature/{이름}
-```
+## React Compiler
 
-- 생성 후 해당 브랜치로 바로 이동합니다.
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-```bash
-    git switch feature/{이름}
-```
+## Expanding the ESLint configuration
 
-## Install package.json
-
-- Node.js 프로젝트에 package.json 파일 기반 의존성 패키지를 설치합니다.
-
-```bash
-    npm install # 혹은 npm i
-```
-
-## Pull Request
-
-- PR은 가능한 상세하게 작성해주세요.
-- AI의 도움을 받았다면 내용을 이해한 뒤 자신만의 언어로 재구성하여 설명해주세요!
-
-## Code Review
-
-- 궁금한 점이나 개선점 등 상대를 위해 자세하게 써주세요~
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
